@@ -1,0 +1,14 @@
+{
+  "name": "Step Recorder",
+  "description": "Capture screenshots for step-by-step guides.",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": ["tabs", "activeTab", "storage"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Record steps"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}
