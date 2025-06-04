@@ -1,6 +1,12 @@
 let listeners = [];
 let recording = false;
 
+chrome.storage.local.get({recording: false}, (data) => {
+  if (data.recording) {
+    start();
+  }
+});
+
 function describeElement(el) {
   if (!el) return '';
   if (el.innerText) return el.innerText.trim().slice(0, 30);

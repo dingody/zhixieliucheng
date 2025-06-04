@@ -1,21 +1,33 @@
 let recording = false;
 
+function broadcast(message) {
+  chrome.tabs.query({}, (tabs) => {
+    for (const tab of tabs) {
+      chrome.tabs.sendMessage(tab.id, message);
+    }
+  });
+}
+
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.storage.local.set({steps: []});
+  chrome.storage.local.set({steps: [], recording: false});
 });
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.type === 'startRecording') {
     recording = true;
-    chrome.storage.local.set({steps: []}, () => {
+    chrome.storage.local.set({steps: [], recording: true}, () => {
       sendResponse({started: true});
     });
+    broadcast({type: 'startRecording'});
     return true;
   }
 
   if (msg.type === 'stopRecording') {
     recording = false;
-    sendResponse({stopped: true});
+    chrome.storage.local.set({recording: false}, () => {
+      sendResponse({stopped: true});
+    });
+    broadcast({type: 'stopRecording'});
     return true;
   }
 
@@ -41,5 +53,11 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.type === 'clearSteps') {
     chrome.storage.local.set({steps: []}, () => sendResponse({cleared: true}));
     return true;
+  }
+});
+
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  if (recording && changeInfo.status === 'complete') {
+    chrome.tabs.sendMessage(tabId, {type: 'startRecording'});
   }
 });

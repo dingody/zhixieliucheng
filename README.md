@@ -15,9 +15,9 @@ This repository provides two examples:
 
 Once loaded, click the extension icon and use **Start Recording** to begin
 tracking your actions. Interactions such as clicks, inputs and scrolling will
-be captured along with screenshots. Use **Stop Recording** when finished.
-Recorded steps appear in the popup where you can also **Export Steps** to a
-JSON file.
+be captured along with screenshots, even as you navigate across tabs. Use
+**Stop Recording** when finished. Recorded steps appear in the popup where you
+can export them as **JSON**, **Markdown**, or **HTML** files.
 
 ## Python Plugin System
 
