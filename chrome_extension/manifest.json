@@ -3,12 +3,19 @@
   "description": "Capture screenshots for step-by-step guides.",
   "version": "1.0",
   "manifest_version": 3,
-  "permissions": ["tabs", "activeTab", "storage"],
+  "permissions": ["tabs", "activeTab", "storage", "scripting"],
+  "host_permissions": ["<all_urls>"],
   "action": {
     "default_popup": "popup.html",
     "default_title": "Record steps"
   },
   "background": {
     "service_worker": "background.js"
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["recorder.js"]
+    }
+  ]
 }

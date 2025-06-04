@@ -13,9 +13,11 @@ This repository provides two examples:
 2. Enable **Developer mode**.
 3. Click **Load unpacked** and select the `chrome_extension` directory.
 
-Once loaded, click the extension icon and use **Capture Step** to grab
-screenshots of the current tab. Captured images are stored locally and shown
-within the popup.
+Once loaded, click the extension icon and use **Start Recording** to begin
+tracking your actions. Interactions such as clicks, inputs and scrolling will
+be captured along with screenshots. Use **Stop Recording** when finished.
+Recorded steps appear in the popup where you can also **Export Steps** to a
+JSON file.
 
 ## Python Plugin System
 
